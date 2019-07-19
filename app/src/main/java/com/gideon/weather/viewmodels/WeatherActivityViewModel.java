@@ -52,5 +52,10 @@ public class WeatherActivityViewModel extends ViewModel {
             }
         });
     }
+
+    //Getters
+    public MutableLiveData<WeatherData> getWeatherDataMutableLiveData() {
+        return weatherDataMutableLiveData;
+    }
 }
 
