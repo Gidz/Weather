@@ -41,6 +41,12 @@ public class DailyForecastAdapter extends RecyclerView.Adapter<DailyForecastAdap
 
     @Override
     public void onBindViewHolder(@NonNull DailyForecastAdapterViewHolder holder, int position) {
+        DailyData dailyData = dailyDataList.get(position);
+
+        //Set the data
+        holder.summaryTextView.setText(String.valueOf(dailyData.getSummary()));
+        holder.maxTempTextView.setText("Max : "+String.valueOf((int)dailyData.getTemperatureMax())+"\u00B0");
+        holder.minTempTextView.setText("Min : "+String.valueOf((int) dailyData.getTemperatureMin())+"\u00B0");
 
     }
 
