@@ -27,13 +27,20 @@ public class WeatherRepo implements RepoInterface {
 
     @Override
     public Observable<WeatherData> downloadWeatherData(String lat, String lon, boolean getLatest) {
-        return localDataStore.downloadWeatherData(lat,lon, false);
+
+        boolean update = false;
+
+        if(needsUpdate()) {
+            update = true;
+        }
+
+        return localDataStore.downloadWeatherData(lat, lon, update);
     }
 
     private boolean needsUpdate(){
         int currentTime = (int) (System.currentTimeMillis() / 1000L);
         int lastUpdated;
-        lastUpdated = sharedPreferences.getInt("lastUpdated", currentTime);
+        lastUpdated = sharedPreferences.getInt("last_updated", currentTime);
 
         if(lastUpdated == currentTime){
             //Need an update

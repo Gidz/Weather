@@ -1,5 +1,6 @@
 package com.gideon.weather.repos;
 
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.gideon.weather.api.ApiCallInterface;
@@ -27,11 +28,13 @@ public class WebDataStore implements RepoInterface{
 
     private ApiCallInterface apiCallInterface;
     private WeatherDatabase weatherDatabase;
+    private SharedPreferences sharedPreferences;
 
     @Inject
-    public WebDataStore(ApiCallInterface apiCallInterface, WeatherDatabase weatherDatabase){
+    public WebDataStore(ApiCallInterface apiCallInterface, WeatherDatabase weatherDatabase, SharedPreferences sharedPreferences){
         this.apiCallInterface = apiCallInterface;
         this.weatherDatabase = weatherDatabase;
+        this.sharedPreferences = sharedPreferences;
     }
 
     @Override
@@ -62,6 +65,9 @@ public class WebDataStore implements RepoInterface{
                 }
 
                 weatherDatabase.weatherDao().insertCurrentData(currentData);
+
+                //Update this in shared preferences
+                sharedPreferences.edit().putInt("last_updated", (int) (System.currentTimeMillis() / 1000L));
 
                 /*Test if the data is porperly inserted or not*/
                 Log.e(TAG, "onNext: Tried to insert the data into database");

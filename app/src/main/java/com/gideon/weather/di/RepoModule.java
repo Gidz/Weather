@@ -25,8 +25,8 @@ public class RepoModule {
 
     /*Data stores*/
     @Provides
-    WebDataStore providesWebDataStore(ApiCallInterface apiCallInterface, WeatherDatabase weatherDatabase){
-        return new WebDataStore(apiCallInterface, weatherDatabase);
+    WebDataStore providesWebDataStore(ApiCallInterface apiCallInterface, WeatherDatabase weatherDatabase, SharedPreferences sharedPreferences){
+        return new WebDataStore(apiCallInterface, weatherDatabase, sharedPreferences);
     }
 
     @Provides
