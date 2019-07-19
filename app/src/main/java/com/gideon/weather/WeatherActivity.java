@@ -29,9 +29,9 @@ public class WeatherActivity extends DaggerAppCompatActivity {
 
     private WeatherActivityViewModel weatherActivityViewModel;
 
+    //Latitude and longitude
     String lat;
     String lon;
-
 
     //Dependency injection
     @Inject
@@ -132,7 +132,7 @@ public class WeatherActivity extends DaggerAppCompatActivity {
                 != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
-                //Show explanation
+                //Show explanation. Maybe code this part later.
             } else {
                 // No explanation needed; request the permission
                 ActivityCompat.requestPermissions(this,
