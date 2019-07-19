@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="resetLocation"
-            app:srcCompat="@drawable/ic_launcher_background" />
+            app:srcCompat="@drawable/ic_location_on_black_24dp" />
 
         <ImageView
             android:id="@+id/refreshImageView"
@@ -48,14 +48,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="refreshData"
-            app:srcCompat="@drawable/ic_launcher_background" />
+            app:srcCompat="@drawable/ic_refresh_black_24dp" />
 
         <ImageView
             android:id="@+id/weatherIcon"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            app:srcCompat="@drawable/ic_launcher_background" />
+            app:srcCompat="@drawable/weather_partly_cloudy" />
 
         <TextView
             android:id="@+id/currentTemperatureTextView"

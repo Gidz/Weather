@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.gideon.weather.R;
 import com.gideon.weather.models.DailyData;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -47,9 +49,22 @@ public class DailyForecastAdapter extends RecyclerView.Adapter<DailyForecastAdap
 
         //Set the data
         holder.summaryTextView.setText(String.valueOf(dailyData.getSummary()));
+
+        //Set the min and max temperatures for that particular day. \u00B0 is unicode for degrees symbol
         holder.maxTempTextView.setText("Max : "+String.valueOf((int)dailyData.getTemperatureMax())+"\u00B0");
         holder.minTempTextView.setText("Min : "+String.valueOf((int) dailyData.getTemperatureMin())+"\u00B0");
 
+
+        String day = getDayOfWeek(dailyData.getTime());
+
+        //The first 2 items of the list will be for today and tomorrow.
+        if(position == 0) { day = "Today"; }
+        if(position == 1){ day = "Tomorrow"; }
+
+        //Set the day
+        holder.dayTextView.setText(day);
+
+        //Set the icon
         holder.dailyWeatherIcon.setImageResource(getWeatherIconName(dailyData.getIcon()));
 
     }
@@ -81,6 +96,37 @@ public class DailyForecastAdapter extends RecyclerView.Adapter<DailyForecastAdap
         }
     }
 
+
+    //Helper methods
+    String getDayOfWeek(int unix_date){
+
+        Date date = new Date((long) unix_date * 1000);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        int day = calendar.get(Calendar.DAY_OF_WEEK);
+
+        switch (day) {
+            case 1:
+                return "Sunday";
+            case 2:
+                return "Monday";
+            case 3:
+                return "Tuesday";
+            case 4:
+                return "Wednesday";
+            case 5:
+                return "Thursday";
+            case 6:
+                return "Friday";
+            case 7:
+                return "Saturday";
+            default:
+                return "ERROR";
+        }
+    }
+
+    //Setters
     public void setDailyDataList(List<DailyData> dailyDataList) {
         this.dailyDataList = dailyDataList;
     }
