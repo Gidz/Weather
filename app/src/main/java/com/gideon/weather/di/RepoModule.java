@@ -1,5 +1,7 @@
 package com.gideon.weather.di;
 
+import android.webkit.WebBackForwardList;
+
 import com.gideon.weather.api.ApiCallInterface;
 import com.gideon.weather.repos.LocalDataStore;
 import com.gideon.weather.repos.WeatherRepo;
@@ -27,7 +29,7 @@ public class RepoModule {
     }
 
     @Provides
-    LocalDataStore providesLocalDataStore(){
-        return new LocalDataStore();
+    LocalDataStore providesLocalDataStore(WeatherDatabase weatherDatabase, WebDataStore webDataStore){
+        return new LocalDataStore(weatherDatabase, webDataStore);
     }
 }

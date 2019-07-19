@@ -11,5 +11,5 @@ import io.reactivex.Observable;
  * view model.
  */
 public interface RepoInterface {
-    public Observable<WeatherData> downloadWeatherData(String lat, String lon);
+    public Observable<WeatherData> downloadWeatherData(String lat, String lon, boolean getLatest);
 }

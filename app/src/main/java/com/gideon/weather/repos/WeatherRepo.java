@@ -22,7 +22,7 @@ public class WeatherRepo implements RepoInterface {
     }
 
     @Override
-    public Observable<WeatherData> downloadWeatherData(String lat, String lon) {
-        return webDataStore.downloadWeatherData(lat,lon);
+    public Observable<WeatherData> downloadWeatherData(String lat, String lon, boolean getLatest) {
+        return localDataStore.downloadWeatherData(lat,lon, false);
     }
 }

@@ -29,7 +29,7 @@ public class WeatherActivityViewModel extends ViewModel {
     }
 
     public void downloadWeatherData(String lat, String lon) {
-        weatherDataObservable = weatherRepo.downloadWeatherData(lat, lon);
+        weatherDataObservable = weatherRepo.downloadWeatherData(lat, lon, false);
         weatherDataObservable.subscribe(new Observer<WeatherData>() {
             @Override
             public void onSubscribe(Disposable d) {

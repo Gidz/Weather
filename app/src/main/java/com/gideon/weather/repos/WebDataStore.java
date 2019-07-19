@@ -1,5 +1,7 @@
 package com.gideon.weather.repos;
 
+import android.util.Log;
+
 import com.gideon.weather.api.ApiCallInterface;
 import com.gideon.weather.models.CurrentData;
 import com.gideon.weather.models.DailyData;
@@ -33,7 +35,8 @@ public class WebDataStore implements RepoInterface{
     }
 
     @Override
-    public Observable<WeatherData> downloadWeatherData(String lat, String lon) {
+    public Observable<WeatherData> downloadWeatherData(String lat, String lon, boolean getLatest) {
+
         Observable<WeatherData> weatherDataObservable = apiCallInterface.getWeatherData(lat+","+lon).subscribeOn(Schedulers.io());
 
         /*Before returning the observable, store it in the database*/
@@ -54,11 +57,21 @@ public class WebDataStore implements RepoInterface{
                 CurrentData currentData = weatherData.getCurrentData();
 
                 /*Store in the table*/
-                for( DailyData dailyData : dailyDataList){
+                for( DailyData dailyData : dailyDataList) {
                     weatherDatabase.weatherDao().insertDailyData(dailyData);
                 }
 
                 weatherDatabase.weatherDao().insertCurrentData(currentData);
+
+                /*Test if the data is porperly inserted or not*/
+                Log.e(TAG, "onNext: Tried to insert the data into database");
+                Log.e(TAG, "onNext: The daily database list is of size : "+dailyDataList.size());
+
+                List<DailyData> retrievedDailyData = weatherDatabase.weatherDao().getDailyData();
+                Log.e(TAG, "onNext: Size of the retrieved daily data is "+retrievedDailyData.size());
+
+                List<CurrentData> retrievedCurrentData = weatherDatabase.weatherDao().getCurrentData();
+                Log.e(TAG, "onNext: Size of the retrieved current data is "+retrievedDailyData.size());
             }
 
             @Override
