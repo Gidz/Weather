@@ -38,7 +38,7 @@ public class DailyForecastAdapter extends RecyclerView.Adapter<DailyForecastAdap
 
     @Override
     public int getItemCount() {
-        return 0;
+        return dailyDataList.size();
     }
 
     public class DailyForecastAdapterViewHolder extends RecyclerView.ViewHolder{
