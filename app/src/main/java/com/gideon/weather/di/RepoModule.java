@@ -1,5 +1,6 @@
 package com.gideon.weather.di;
 
+import android.content.SharedPreferences;
 import android.webkit.WebBackForwardList;
 
 import com.gideon.weather.api.ApiCallInterface;
@@ -18,8 +19,8 @@ public class RepoModule {
     /*Repo*/
     @Singleton
     @Provides
-    WeatherRepo provideWeatherRepo(WebDataStore webDataStore, LocalDataStore localDataStore){
-        return new WeatherRepo(webDataStore, localDataStore);
+    WeatherRepo provideWeatherRepo(WebDataStore webDataStore, LocalDataStore localDataStore, SharedPreferences sharedPreferences){
+        return new WeatherRepo(webDataStore, localDataStore, sharedPreferences);
     }
 
     /*Data stores*/
