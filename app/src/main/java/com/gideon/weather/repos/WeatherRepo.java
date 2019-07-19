@@ -1,6 +1,7 @@
 package com.gideon.weather.repos;
 
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.gideon.weather.models.WeatherData;
 
@@ -13,6 +14,8 @@ import io.reactivex.Observable;
  * data. This class makes a decision where to get the data from - web, local etc.,
  */
 public class WeatherRepo implements RepoInterface {
+
+    private String TAG = "WeatherRepo";
 
     private WebDataStore webDataStore;
     private LocalDataStore localDataStore;
@@ -47,6 +50,8 @@ public class WeatherRepo implements RepoInterface {
             return true;
         }
         else if (currentTime - lastUpdated >= 3600){
+
+            Log.e(TAG, "needsUpdate: Last updated "+String.valueOf(currentTime - lastUpdated));
             //Need an update
             return true;
         }

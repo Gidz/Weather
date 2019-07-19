@@ -67,7 +67,7 @@ public class WebDataStore implements RepoInterface{
                 weatherDatabase.weatherDao().insertCurrentData(currentData);
 
                 //Update this in shared preferences
-                sharedPreferences.edit().putInt("last_updated", (int) (System.currentTimeMillis() / 1000L));
+                sharedPreferences.edit().putInt("last_updated", (int) (System.currentTimeMillis() / 1000L)).commit();
 
                 /*Test if the data is porperly inserted or not*/
                 Log.e(TAG, "onNext: Tried to insert the data into database");
