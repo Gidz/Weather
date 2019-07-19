@@ -1,9 +1,16 @@
 package com.gideon.weather;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.gideon.weather.viewmodels.ViewModelProviderFactory;
@@ -14,6 +21,8 @@ import javax.inject.Inject;
 import dagger.android.support.DaggerAppCompatActivity;
 
 public class WeatherActivity extends DaggerAppCompatActivity {
+
+    public static String TAG = "WeatherActivity";
 
     private WeatherActivityViewModel weatherActivityViewModel;
 
@@ -63,5 +72,58 @@ public class WeatherActivity extends DaggerAppCompatActivity {
     }
 
     private void setLocation() {
+        /*To set the location, we first need to check if the Location permission were enabled.
+        * If they weren't enabled, ask for permissions. Else, go ahead and set the location*/
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            askLocationPermission();
+        } else {
+            final LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+            LocationListener locationListener = new LocationListener() {
+                @Override
+                public void onLocationChanged(Location location) {
+
+                    //Save the new location in Shared preferences
+                    sharedPreferences.edit().putString("lat", String.valueOf(location.getLatitude())).commit();
+                    sharedPreferences.edit().putString("lon", String.valueOf(location.getLongitude())).commit();
+
+                    Log.d(TAG, "Just updated the location to : " + location.getLatitude() + "," + location.getLongitude());
+
+                    //Update the local values as well. Since these are the values which will be
+                    //used to query the View model
+                    lat = sharedPreferences.getString("lat", "UNKNOWN");
+                    lon = sharedPreferences.getString("lon", "UNKNOWN");
+
+                    //Now observe for data changes with the new location
+                    observeDataChanges();
+
+                    //It is no longer necessary to keep listening for location updates.
+                    //Stop observing to save battery.
+                    locationManager.removeUpdates(this);
+                }
+
+                @Override
+                public void onStatusChanged(String s, int i, Bundle bundle) {
+
+                }
+
+                @Override
+                public void onProviderEnabled(String s) {
+
+                }
+
+                @Override
+                public void onProviderDisabled(String s) {
+
+                }
+            };
+
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
+        }
+    }
+
+    //TODO: Ask for location permission
+    private void askLocationPermission() {
     }
 }
