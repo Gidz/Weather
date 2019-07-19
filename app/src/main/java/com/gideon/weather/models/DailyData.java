@@ -1,10 +1,16 @@
 package com.gideon.weather.models;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-
+@Entity(tableName = "daily_data")
 public class DailyData {
+
+    @PrimaryKey(autoGenerate = true)
+    private int id;
 
     @SerializedName("time")
     @Expose
@@ -25,6 +31,14 @@ public class DailyData {
     @SerializedName("temperatureMax")
     @Expose
     private float temperatureMax;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getTime() {
         return time;
