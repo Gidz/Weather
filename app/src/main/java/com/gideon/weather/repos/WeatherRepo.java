@@ -2,6 +2,8 @@ package com.gideon.weather.repos;
 
 import com.gideon.weather.models.WeatherData;
 
+import javax.inject.Inject;
+
 import io.reactivex.Observable;
 
 /**
@@ -9,6 +11,14 @@ import io.reactivex.Observable;
  * data. This class makes a decision where to get the data from - web, local etc.,
  */
 public class WeatherRepo implements RepoInterface {
+
+    private WebDataStore webDataStore;
+
+    @Inject
+    public WeatherRepo(WebDataStore webDataStore) {
+        this.webDataStore = webDataStore;
+    }
+
     @Override
     public Observable<WeatherData> downloadWeatherData(String lat, String lon) {
         return null;
