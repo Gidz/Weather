@@ -17,11 +17,15 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.gideon.weather.adapters.DailyForecastAdapter;
 import com.gideon.weather.models.WeatherData;
 import com.gideon.weather.viewmodels.ViewModelProviderFactory;
 import com.gideon.weather.viewmodels.WeatherActivityViewModel;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -48,6 +52,9 @@ public class WeatherActivity extends DaggerAppCompatActivity {
 
     @Inject
     SharedPreferences sharedPreferences;
+
+    @Inject
+    DailyForecastAdapter dailyForecastAdapter;
 
     //View Binding
     @BindView(R.id.currentTemperatureTextView)

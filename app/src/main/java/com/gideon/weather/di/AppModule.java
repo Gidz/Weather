@@ -3,6 +3,7 @@ package com.gideon.weather.di;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.gideon.weather.adapters.DailyForecastAdapter;
 import com.gideon.weather.api.ApiCallInterface;
 import com.gideon.weather.base.App;
 
@@ -57,5 +58,11 @@ public class AppModule {
     @Provides
     SharedPreferences provideSharedPreferences(App app){
         return app.getSharedPreferences(SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE);
+    }
+
+    /*Adapters*/
+    @Provides
+    DailyForecastAdapter provideDailyForecastAdapter(){
+        return new DailyForecastAdapter();
     }
 }
