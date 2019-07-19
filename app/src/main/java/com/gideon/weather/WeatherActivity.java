@@ -72,6 +72,8 @@ public class WeatherActivity extends DaggerAppCompatActivity {
     }
 
     private void observeDataChanges() {
+        //Download data
+        weatherActivityViewModel.downloadWeatherData(lat, lon);
     }
 
     private void setLocation() {
