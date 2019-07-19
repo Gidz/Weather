@@ -9,7 +9,7 @@ import dagger.android.support.DaggerAppCompatActivity;
 public class WeatherActivity extends DaggerAppCompatActivity {
 
     private WeatherActivityViewModel weatherActivityViewModel;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
