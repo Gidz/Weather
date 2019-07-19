@@ -1,6 +1,7 @@
 package com.gideon.weather.di;
 
 import com.gideon.weather.base.App;
+import com.gideon.weather.di.activities.ActivityBuilderModule;
 
 import javax.inject.Singleton;
 

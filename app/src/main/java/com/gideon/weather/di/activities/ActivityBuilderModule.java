@@ -1,4 +1,4 @@
-package com.gideon.weather.di;
+package com.gideon.weather.di.activities;
 
 import com.gideon.weather.WeatherActivity;
 
