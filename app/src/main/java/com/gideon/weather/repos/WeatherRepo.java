@@ -9,6 +9,8 @@ import javax.inject.Inject;
 
 import io.reactivex.Observable;
 
+import static com.gideon.weather.base.Constants.UPDATE_FREQUENCY;
+
 /**
  * This is the entry point for view models and the rest of the project to retrive weather related
  * data. This class makes a decision where to get the data from - web, local etc.,
@@ -17,13 +19,11 @@ public class WeatherRepo implements RepoInterface {
 
     private String TAG = "WeatherRepo";
 
-    private WebDataStore webDataStore;
     private LocalDataStore localDataStore;
     private SharedPreferences sharedPreferences;
 
     @Inject
-    public WeatherRepo(WebDataStore webDataStore, LocalDataStore localDataStore, SharedPreferences sharedPreferences) {
-        this.webDataStore = webDataStore;
+    public WeatherRepo(LocalDataStore localDataStore, SharedPreferences sharedPreferences) {
         this.localDataStore = localDataStore;
         this.sharedPreferences = sharedPreferences;
     }
@@ -49,10 +49,10 @@ public class WeatherRepo implements RepoInterface {
             //Need an update
             return true;
         }
-        else if (currentTime - lastUpdated >= 3600){
+        else if (currentTime - lastUpdated >= UPDATE_FREQUENCY){
 
             Log.e(TAG, "needsUpdate: Last updated "+String.valueOf(currentTime - lastUpdated));
-            //Need an update
+            //Need an update.
             return true;
         }
         else{

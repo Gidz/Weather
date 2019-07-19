@@ -19,8 +19,8 @@ public class RepoModule {
     /*Repo*/
     @Singleton
     @Provides
-    WeatherRepo provideWeatherRepo(WebDataStore webDataStore, LocalDataStore localDataStore, SharedPreferences sharedPreferences){
-        return new WeatherRepo(webDataStore, localDataStore, sharedPreferences);
+    WeatherRepo provideWeatherRepo(LocalDataStore localDataStore, SharedPreferences sharedPreferences){
+        return new WeatherRepo(localDataStore, sharedPreferences);
     }
 
     /*Data stores*/

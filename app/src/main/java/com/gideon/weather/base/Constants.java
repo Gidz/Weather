@@ -5,4 +5,5 @@ public class Constants {
     public static String  BASE_URL = "https://api.darksky.net/forecast/"+ API_KEY+"/";
     public static String SHARED_PREFERENCES_KEY = "WEATHER_PREFERENCES";
     public static String DB_NAME = "WEATHER_DB";
+    public static int UPDATE_FREQUENCY = 3600; // In seconds
 }
