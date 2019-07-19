@@ -2,6 +2,8 @@ package com.gideon.weather.di;
 
 import com.gideon.weather.base.App;
 import com.gideon.weather.di.activities.ActivityBuilderModule;
+import com.gideon.weather.di.viewmodels.ViewModelFactoryModule;
+import com.gideon.weather.di.viewmodels.ViewModelsModule;
 
 import javax.inject.Singleton;
 
@@ -16,7 +18,9 @@ import dagger.android.support.AndroidSupportInjectionModule;
         modules = {
                 AndroidSupportInjectionModule.class,
                 ActivityBuilderModule.class,
-                AppModule.class
+                AppModule.class,
+                ViewModelFactoryModule.class,
+                ViewModelsModule.class
         }
 )
 public interface AppComponent extends AndroidInjector<App> {
