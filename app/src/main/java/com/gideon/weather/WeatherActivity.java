@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gideon.weather.adapters.DailyForecastAdapter;
+import com.gideon.weather.models.DailyData;
 import com.gideon.weather.models.WeatherData;
 import com.gideon.weather.viewmodels.ViewModelProviderFactory;
 import com.gideon.weather.viewmodels.WeatherActivityViewModel;
@@ -103,6 +104,17 @@ public class WeatherActivity extends DaggerAppCompatActivity {
         }
     }
 
+    private void displayRecyclerView(List<DailyData> data) {
+        //Set the data
+        dailyForecastAdapter.setDailyDataList(data);
+
+        //RecyclerView for daily forecast
+        dailyForecastRecyclerView.setAdapter(dailyForecastAdapter);
+
+        //Set the layout manager
+        dailyForecastRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
     private void observeDataChanges() {
         //Download data
         weatherActivityViewModel.downloadWeatherData(lat, lon);
@@ -110,6 +122,7 @@ public class WeatherActivity extends DaggerAppCompatActivity {
             @Override
             public void onChanged(WeatherData weatherData) {
                 currentTemperatureTextView.setText(String.valueOf((int) weatherData.getCurrentData().getTemperature()) + "\u00B0");
+                displayRecyclerView(weatherData.getDaily().getData());
                 Log.e(TAG, "Downloaded the data : "+weatherData.getCurrentData().getTemperature());
             }
         });
