@@ -27,5 +27,11 @@ public class WeatherActivity extends DaggerAppCompatActivity {
 
         //Bind the View model to this activity
         weatherActivityViewModel = ViewModelProviders.of(this, viewModelProviderFactory).get(WeatherActivityViewModel.class);
+
+        //Check the location preferences
+        checkLocationPreferences();
+    }
+
+    private void checkLocationPreferences() {
     }
 }
