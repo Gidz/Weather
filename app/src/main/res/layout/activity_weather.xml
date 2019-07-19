@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MainActivity">
+    tools:context=".ui.WeatherActivity">
 
     <TextView
         android:id="@+id/daily_forecast_title"
@@ -54,7 +54,9 @@
             android:id="@+id/weatherIcon"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="5"
+            android:scaleX="1.5"
+            android:scaleY="1.5"
             app:srcCompat="@drawable/weather_partly_cloudy" />
 
         <TextView

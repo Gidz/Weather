@@ -9,6 +9,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -199,5 +200,13 @@ public class WeatherActivity extends DaggerAppCompatActivity {
                         LOCATION_PERMISSION_CODE);
             }
         }
+    }
+
+    public void refreshData(View view) {
+        observeDataChanges();
+    }
+
+    public void resetLocation(View view) {
+        setLocation();
     }
 }
