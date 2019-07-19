@@ -1,5 +1,7 @@
 package com.gideon.weather.viewmodels;
 
+import android.util.Log;
+
 import androidx.lifecycle.ViewModel;
 
 import com.gideon.weather.models.WeatherData;
@@ -8,6 +10,8 @@ import com.gideon.weather.repos.WeatherRepo;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 
 public class WeatherActivityViewModel extends ViewModel {
 
@@ -20,8 +24,30 @@ public class WeatherActivityViewModel extends ViewModel {
     public WeatherActivityViewModel(WeatherRepo weatherRepo) {
         this.weatherRepo = weatherRepo;
     }
-    
+
     public void downloadWeatherData(String lat, String lon) {
         weatherDataObservable = weatherRepo.downloadWeatherData(lat, lon);
+        weatherDataObservable.subscribe(new Observer<WeatherData>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(WeatherData weatherData) {
+                //Do something here
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.e(TAG, "onError: "+e.fillInStackTrace().toString());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
     }
 }
+
