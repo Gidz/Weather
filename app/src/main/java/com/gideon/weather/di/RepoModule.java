@@ -6,8 +6,10 @@ import com.gideon.weather.repos.WebDataStore;
 
 import javax.inject.Singleton;
 
+import dagger.Module;
 import dagger.Provides;
 
+@Module
 public class RepoModule {
     /*Repo*/
     @Singleton

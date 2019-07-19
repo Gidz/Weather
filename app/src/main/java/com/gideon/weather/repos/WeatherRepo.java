@@ -21,6 +21,6 @@ public class WeatherRepo implements RepoInterface {
 
     @Override
     public Observable<WeatherData> downloadWeatherData(String lat, String lon) {
-        return null;
+        return webDataStore.downloadWeatherData(lat,lon);
     }
 }
