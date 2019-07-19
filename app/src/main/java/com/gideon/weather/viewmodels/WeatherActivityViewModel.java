@@ -16,4 +16,9 @@ public class WeatherActivityViewModel extends ViewModel {
     public WeatherActivityViewModel(WeatherRepo weatherRepo) {
         this.weatherRepo = weatherRepo;
     }
+
+    //TODO: Request from the repo and download data
+    public void downloadWeatherData(String lat, String lon) {
+
+    }
 }
