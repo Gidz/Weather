@@ -12,7 +12,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.MutableLiveData;
@@ -107,7 +109,7 @@ public class WeatherActivity extends DaggerAppCompatActivity {
             setLocation();
         } else {
             //The location was set before
-            observeDataChanges(false);
+            observeDataChanges(true);
         }
     }
 
@@ -211,6 +213,25 @@ public class WeatherActivity extends DaggerAppCompatActivity {
 
     public void refreshData(View view) {
         observeDataChanges(true);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode) {
+            case LOCATION_PERMISSION_CODE: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    setLocation();
+                } else {
+
+                    //Permission denied.
+                    Toast.makeText(WeatherActivity.this, "Cannot update weather data without location permissions!", Toast.LENGTH_LONG).show();
+                }
+                return;
+            }
+        }
     }
 
     public void resetLocation(View view) {
