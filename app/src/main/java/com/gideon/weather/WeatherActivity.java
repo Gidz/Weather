@@ -13,6 +13,7 @@ import android.util.Log;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.gideon.weather.models.WeatherData;
@@ -80,6 +81,13 @@ public class WeatherActivity extends DaggerAppCompatActivity {
     private void observeDataChanges() {
         //Download data
         weatherActivityViewModel.downloadWeatherData(lat, lon);
+        weatherDataMutableLiveData.observe(this, new Observer<WeatherData>() {
+            @Override
+            public void onChanged(WeatherData weatherData) {
+                //Do something here
+                Log.e(TAG, "Downloaded the data : "+weatherData.getCurrentData().getTemperature());
+            }
+        });
     }
 
     private void setLocation() {
