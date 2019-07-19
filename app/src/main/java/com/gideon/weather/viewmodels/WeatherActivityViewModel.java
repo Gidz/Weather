@@ -38,7 +38,7 @@ public class WeatherActivityViewModel extends ViewModel {
 
             @Override
             public void onNext(WeatherData weatherData) {
-                //Do something here
+                weatherDataMutableLiveData.postValue(weatherData);
             }
 
             @Override
