@@ -35,6 +35,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerAppCompatActivity;
 
+import static com.gideon.weather.ui.Icons.getWeatherIconName;
+
 public class WeatherActivity extends DaggerAppCompatActivity {
 
     public static String TAG = "WeatherActivity";
@@ -123,6 +125,8 @@ public class WeatherActivity extends DaggerAppCompatActivity {
             @Override
             public void onChanged(WeatherData weatherData) {
                 currentTemperatureTextView.setText(String.valueOf((int) weatherData.getCurrentData().getTemperature()) + "\u00B0");
+                weatherIcon.setImageResource(getWeatherIconName(weatherData.getCurrentData().getIcon()));
+
                 displayRecyclerView(weatherData.getDaily().getData());
                 Log.e(TAG, "Downloaded the data : "+weatherData.getCurrentData().getTemperature());
             }
