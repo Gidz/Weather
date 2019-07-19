@@ -10,6 +10,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -23,6 +24,8 @@ import dagger.android.support.DaggerAppCompatActivity;
 public class WeatherActivity extends DaggerAppCompatActivity {
 
     public static String TAG = "WeatherActivity";
+
+    private static final int LOCATION_PERMISSION_CODE = 101;
 
     private WeatherActivityViewModel weatherActivityViewModel;
 
@@ -123,7 +126,19 @@ public class WeatherActivity extends DaggerAppCompatActivity {
         }
     }
 
-    //TODO: Ask for location permission
     private void askLocationPermission() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+                //Show explanation
+            } else {
+                // No explanation needed; request the permission
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        LOCATION_PERMISSION_CODE);
+            }
+        }
     }
 }
