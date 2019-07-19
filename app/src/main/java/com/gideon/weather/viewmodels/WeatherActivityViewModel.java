@@ -28,8 +28,8 @@ public class WeatherActivityViewModel extends ViewModel {
         weatherDataMutableLiveData = new MutableLiveData<WeatherData>();
     }
 
-    public void downloadWeatherData(String lat, String lon) {
-        weatherDataObservable = weatherRepo.downloadWeatherData(lat, lon, false);
+    public void downloadWeatherData(String lat, String lon, boolean getLatest) {
+        weatherDataObservable = weatherRepo.downloadWeatherData(lat, lon, getLatest);
         weatherDataObservable.subscribe(new Observer<WeatherData>() {
             @Override
             public void onSubscribe(Disposable d) {

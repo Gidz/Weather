@@ -56,6 +56,7 @@ public class WeatherRepo implements RepoInterface {
             return true;
         }
         else{
+            Log.e(TAG, "NO  NEED TO UPDATE. FETCH FROM LOCAL STORE!");
             //No need to update
             return false;
         }

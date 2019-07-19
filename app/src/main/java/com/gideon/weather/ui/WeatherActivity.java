@@ -104,7 +104,7 @@ public class WeatherActivity extends DaggerAppCompatActivity {
             setLocation();
         } else {
             //The location was set before
-            observeDataChanges();
+            observeDataChanges(true);
         }
     }
 
@@ -119,9 +119,9 @@ public class WeatherActivity extends DaggerAppCompatActivity {
         dailyForecastRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private void observeDataChanges() {
+    private void observeDataChanges(boolean getLatest) {
         //Download data
-        weatherActivityViewModel.downloadWeatherData(lat, lon);
+        weatherActivityViewModel.downloadWeatherData(lat, lon, getLatest);
         weatherDataMutableLiveData.observe(this, new Observer<WeatherData>() {
             @Override
             public void onChanged(WeatherData weatherData) {
@@ -130,7 +130,6 @@ public class WeatherActivity extends DaggerAppCompatActivity {
                 weatherIcon.setImageResource(getWeatherIconName(weatherData.getCurrentData().getIcon()));
 
                 displayRecyclerView(weatherData.getDaily().getData());
-                Log.e(TAG, "Downloaded the data : "+weatherData.getCurrentData().getTemperature());
             }
         });
     }
@@ -160,7 +159,7 @@ public class WeatherActivity extends DaggerAppCompatActivity {
                     lon = sharedPreferences.getString("lon", "UNKNOWN");
 
                     //Now observe for data changes with the new location
-                    observeDataChanges();
+                    observeDataChanges(false);
 
                     //It is no longer necessary to keep listening for location updates.
                     //Stop observing to save battery.
@@ -204,7 +203,7 @@ public class WeatherActivity extends DaggerAppCompatActivity {
     }
 
     public void refreshData(View view) {
-        observeDataChanges();
+        observeDataChanges(true);
     }
 
     public void resetLocation(View view) {
