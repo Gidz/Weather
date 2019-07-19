@@ -8,10 +8,12 @@ import com.gideon.weather.repos.LocalDataStore;
 import com.gideon.weather.repos.WebDataStore;
 import com.gideon.weather.room.WeatherDatabase;
 
+import dagger.Module;
 import dagger.Provides;
 
 import static com.gideon.weather.base.Constants.DB_NAME;
 
+@Module
 public class RoomModule {
     /*Database*/
     @Provides
@@ -19,16 +21,5 @@ public class RoomModule {
         return Room.databaseBuilder(app.getApplicationContext(),
                 WeatherDatabase.class,
                 DB_NAME).fallbackToDestructiveMigration().build();
-    }
-
-    /*Data stores*/
-    @Provides
-    WebDataStore providesWebDataStore(ApiCallInterface apiCallInterface){
-        return new WebDataStore(apiCallInterface);
-    }
-
-    @Provides
-    LocalDataStore providesLocalDataStore(){
-        return new LocalDataStore();
     }
 }

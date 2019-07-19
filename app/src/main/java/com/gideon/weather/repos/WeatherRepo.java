@@ -13,10 +13,12 @@ import io.reactivex.Observable;
 public class WeatherRepo implements RepoInterface {
 
     private WebDataStore webDataStore;
+    private LocalDataStore localDataStore;
 
     @Inject
-    public WeatherRepo(WebDataStore webDataStore) {
+    public WeatherRepo(WebDataStore webDataStore, LocalDataStore localDataStore) {
         this.webDataStore = webDataStore;
+        this.localDataStore = localDataStore;
     }
 
     @Override

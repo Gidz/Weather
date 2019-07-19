@@ -1,8 +1,10 @@
 package com.gideon.weather.di;
 
 import com.gideon.weather.api.ApiCallInterface;
+import com.gideon.weather.repos.LocalDataStore;
 import com.gideon.weather.repos.WeatherRepo;
 import com.gideon.weather.repos.WebDataStore;
+import com.gideon.weather.room.WeatherDatabase;
 
 import javax.inject.Singleton;
 
@@ -14,13 +16,18 @@ public class RepoModule {
     /*Repo*/
     @Singleton
     @Provides
-    WeatherRepo provideWeatherRepo(WebDataStore webDataStore){
-        return new WeatherRepo(webDataStore);
+    WeatherRepo provideWeatherRepo(WebDataStore webDataStore, LocalDataStore localDataStore){
+        return new WeatherRepo(webDataStore, localDataStore);
     }
 
     /*Data stores*/
     @Provides
-    WebDataStore providesWebDataStore(ApiCallInterface apiCallInterface){
-        return new WebDataStore(apiCallInterface);
+    WebDataStore providesWebDataStore(ApiCallInterface apiCallInterface, WeatherDatabase weatherDatabase){
+        return new WebDataStore(apiCallInterface, weatherDatabase);
+    }
+
+    @Provides
+    LocalDataStore providesLocalDataStore(){
+        return new LocalDataStore();
     }
 }
