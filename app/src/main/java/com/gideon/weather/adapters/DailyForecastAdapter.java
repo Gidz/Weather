@@ -17,6 +17,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.gideon.weather.ui.Icons.getWeatherIconName;
+
 /**
  * We will need to display a Recyclerview with daily forecast.
  * That's when this adapter comes in handy.
@@ -47,6 +49,8 @@ public class DailyForecastAdapter extends RecyclerView.Adapter<DailyForecastAdap
         holder.summaryTextView.setText(String.valueOf(dailyData.getSummary()));
         holder.maxTempTextView.setText("Max : "+String.valueOf((int)dailyData.getTemperatureMax())+"\u00B0");
         holder.minTempTextView.setText("Min : "+String.valueOf((int) dailyData.getTemperatureMin())+"\u00B0");
+
+        holder.dailyWeatherIcon.setImageResource(getWeatherIconName(dailyData.getIcon()));
 
     }
 
