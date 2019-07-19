@@ -12,8 +12,10 @@ import android.util.Log;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.gideon.weather.models.WeatherData;
 import com.gideon.weather.viewmodels.ViewModelProviderFactory;
 import com.gideon.weather.viewmodels.WeatherActivityViewModel;
 
@@ -28,6 +30,7 @@ public class WeatherActivity extends DaggerAppCompatActivity {
     private static final int LOCATION_PERMISSION_CODE = 101;
 
     private WeatherActivityViewModel weatherActivityViewModel;
+    private MutableLiveData<WeatherData> weatherDataMutableLiveData;
 
     //Latitude and longitude
     String lat;
@@ -47,6 +50,9 @@ public class WeatherActivity extends DaggerAppCompatActivity {
 
         //Bind the View model to this activity
         weatherActivityViewModel = ViewModelProviders.of(this, viewModelProviderFactory).get(WeatherActivityViewModel.class);
+
+        //Get the mutable live data object to observe
+        weatherDataMutableLiveData = weatherActivityViewModel.getWeatherDataMutableLiveData();
 
         //Check the location preferences
         checkLocationPreferences();
