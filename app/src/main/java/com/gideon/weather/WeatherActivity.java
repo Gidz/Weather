@@ -102,7 +102,7 @@ public class WeatherActivity extends DaggerAppCompatActivity {
         weatherDataMutableLiveData.observe(this, new Observer<WeatherData>() {
             @Override
             public void onChanged(WeatherData weatherData) {
-                //Do something here
+                currentTemperatureTextView.setText(String.valueOf((int) weatherData.getCurrentData().getTemperature()) + "\u00B0");
                 Log.e(TAG, "Downloaded the data : "+weatherData.getCurrentData().getTemperature());
             }
         });
