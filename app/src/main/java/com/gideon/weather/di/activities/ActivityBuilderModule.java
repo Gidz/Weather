@@ -1,6 +1,6 @@
 package com.gideon.weather.di.activities;
 
-import com.gideon.weather.WeatherActivity;
+import com.gideon.weather.ui.WeatherActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;

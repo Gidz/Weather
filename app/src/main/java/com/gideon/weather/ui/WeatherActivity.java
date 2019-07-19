@@ -1,4 +1,4 @@
-package com.gideon.weather;
+package com.gideon.weather.ui;
 
 import android.Manifest;
 import android.content.Context;
@@ -20,6 +20,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.gideon.weather.R;
 import com.gideon.weather.adapters.DailyForecastAdapter;
 import com.gideon.weather.models.DailyData;
 import com.gideon.weather.models.WeatherData;
