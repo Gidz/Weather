@@ -2,6 +2,7 @@ package com.gideon.weather.viewmodels;
 
 import android.util.Log;
 
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.gideon.weather.models.WeatherData;
@@ -19,10 +20,12 @@ public class WeatherActivityViewModel extends ViewModel {
 
     private WeatherRepo weatherRepo;
     private Observable<WeatherData> weatherDataObservable;
+    private MutableLiveData<WeatherData> weatherDataMutableLiveData;
 
     @Inject
     public WeatherActivityViewModel(WeatherRepo weatherRepo) {
         this.weatherRepo = weatherRepo;
+        weatherDataMutableLiveData = new MutableLiveData<WeatherData>();
     }
 
     public void downloadWeatherData(String lat, String lon) {
