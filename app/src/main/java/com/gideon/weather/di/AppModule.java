@@ -1,6 +1,10 @@
 package com.gideon.weather.di;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.gideon.weather.api.ApiCallInterface;
+import com.gideon.weather.base.App;
 
 import javax.inject.Singleton;
 
@@ -11,6 +15,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.gideon.weather.base.Constants.BASE_URL;
+import static com.gideon.weather.base.Constants.SHARED_PREFERENCES_KEY;
 
 @Module
 public class AppModule {
@@ -45,5 +50,12 @@ public class AppModule {
     @Provides
     ApiCallInterface getApi(Retrofit retrofit) {
         return retrofit.create(ApiCallInterface.class);
+    }
+
+    /*Shared preferences*/
+    @Singleton
+    @Provides
+    SharedPreferences provideSharedPreferences(App app){
+        return app.getSharedPreferences(SHARED_PREFERENCES_KEY, Context.MODE_PRIVATE);
     }
 }
