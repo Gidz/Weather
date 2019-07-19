@@ -71,6 +71,9 @@ public class WeatherActivity extends DaggerAppCompatActivity {
     @BindView(R.id.dailyForecastRecyclerList)
     RecyclerView dailyForecastRecyclerView;
 
+    @BindView(R.id.loadingMessage)
+    TextView loadingMessage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,11 +107,15 @@ public class WeatherActivity extends DaggerAppCompatActivity {
             setLocation();
         } else {
             //The location was set before
-            observeDataChanges(true);
+            observeDataChanges(false);
         }
     }
 
     private void displayRecyclerView(List<DailyData> data) {
+
+        //Hide the loading message
+        loadingMessage.setVisibility(View.INVISIBLE);
+
         //Set the data
         dailyForecastAdapter.setDailyDataList(data);
 
@@ -159,7 +166,7 @@ public class WeatherActivity extends DaggerAppCompatActivity {
                     lon = sharedPreferences.getString("lon", "UNKNOWN");
 
                     //Now observe for data changes with the new location
-                    observeDataChanges(false);
+                    observeDataChanges(true);
 
                     //It is no longer necessary to keep listening for location updates.
                     //Stop observing to save battery.
