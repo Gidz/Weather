@@ -1,5 +1,6 @@
 package com.gideon.weather.adapters;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -28,7 +29,14 @@ public class DailyForecastAdapter extends RecyclerView.Adapter<DailyForecastAdap
     @NonNull
     @Override
     public DailyForecastAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        //Get the layout inflater
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+
+        //Inflate the user item view
+        View view = layoutInflater.inflate(R.layout.daily_data_list_item, parent, false);
+
+        //Return this view
+        return new DailyForecastAdapterViewHolder(view);
     }
 
     @Override
