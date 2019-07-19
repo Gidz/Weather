@@ -9,12 +9,15 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.gideon.weather.models.WeatherData;
 import com.gideon.weather.viewmodels.ViewModelProviderFactory;
@@ -22,6 +25,8 @@ import com.gideon.weather.viewmodels.WeatherActivityViewModel;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import dagger.android.support.DaggerAppCompatActivity;
 
 public class WeatherActivity extends DaggerAppCompatActivity {
@@ -44,6 +49,16 @@ public class WeatherActivity extends DaggerAppCompatActivity {
     @Inject
     SharedPreferences sharedPreferences;
 
+    //View Binding
+    @BindView(R.id.currentTemperatureTextView)
+    TextView currentTemperatureTextView;
+
+    @BindView(R.id.weatherIcon)
+    ImageView weatherIcon;
+
+    @BindView(R.id.dailyForecastRecyclerList)
+    RecyclerView dailyForecastRecyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +69,9 @@ public class WeatherActivity extends DaggerAppCompatActivity {
 
         //Get the mutable live data object to observe
         weatherDataMutableLiveData = weatherActivityViewModel.getWeatherDataMutableLiveData();
+
+        //Bind all the views and such
+        ButterKnife.bind(this);
 
         //Check the location preferences
         checkLocationPreferences();

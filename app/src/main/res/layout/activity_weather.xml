@@ -68,7 +68,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/daily_forecast_recycler_list"
+        android:id="@+id/dailyForecastRecyclerList"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
