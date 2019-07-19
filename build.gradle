@@ -22,6 +22,15 @@ allprojects {
     }
 }
 
+ext {
+    daggerVersion = '2.16'
+    room_version = '2.1.0'
+    glide_version = '4.9.0'
+    retrofit_version = '2.4.0'
+    butterknife_version = '10.1.0'
+    cardview_version = '28.0.0'
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
